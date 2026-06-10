@@ -1,0 +1,28 @@
+from __future__ import annotations
+
+from typing import Any
+
+from gaslight_detector.runners.base import BaseRunner
+
+
+class OpenAIRunner(BaseRunner):
+    provider_name = "openai"
+
+    def __init__(self, model: str, **kwargs: Any) -> None:
+        super().__init__(model=model, **kwargs)
+        try:
+            from openai import OpenAI
+        except Exception as exc:  # pragma: no cover - optional dependency
+            raise RuntimeError("Install providers: `pip install gaslight-detector[providers]`.") from exc
+        self._client = OpenAI()
+
+    def _generate_once(self, prompt: str, system: str | None = None) -> str:  # pragma: no cover
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        resp = self._client.chat.completions.create(
+            model=self.model, messages=messages,
+            temperature=self.temperature, max_tokens=self.max_tokens,
+        )
+        return resp.choices[0].message.content or ""
