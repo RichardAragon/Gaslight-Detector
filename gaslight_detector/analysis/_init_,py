@@ -1,0 +1,3 @@
+from gaslight_detector.analysis.pipeline import analyze, AnalysisResult
+
+__all__ = ["analyze", "AnalysisResult"]
