@@ -1,0 +1,5 @@
+# Reference provider/model identifiers (informational; the CLI takes --provider/--model).
+openai:    { example_model: gpt-4.1 }
+anthropic: { example_model: claude-3-5-sonnet-latest }
+local:     { example_model: Qwen/Qwen2.5-7B-Instruct }
+replay:    { example_model: replay }
