@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gaslight-detector"
+version = "0.2.0"
+description = "A benchmark for framing-conditioned structural deformation in AI model outputs."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Gaslight Detector contributors" }]
+keywords = ["llm", "benchmark", "evaluation", "robustness", "safety"]
+dependencies = [
+  "numpy>=1.24",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+providers = ["openai>=1.0", "anthropic>=0.30"]
+embedding = ["sentence-transformers>=2.2"]
+local = ["transformers>=4.40", "torch>=2.0"]
+plots = ["matplotlib>=3.7"]
+dev = ["pytest>=7.0", "matplotlib>=3.7"]
+all = ["openai>=1.0", "anthropic>=0.30", "sentence-transformers>=2.2", "matplotlib>=3.7"]
+
+[project.scripts]
+gd = "gaslight_detector.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gaslight_detector*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
