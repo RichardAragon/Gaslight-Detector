@@ -1,0 +1,15 @@
+"""Run one task against a provider and write a report.
+
+    OPENAI_API_KEY=... python examples/run_single_task.py
+"""
+from gaslight_detector.cli import main
+
+if __name__ == "__main__":
+    raise SystemExit(main([
+        "run",
+        "--task", "tasks/optimizer_manifold_retention.yaml",
+        "--provider", "openai",
+        "--model", "gpt-4.1",
+        "--samples", "3",
+        "--out", "outputs/openai_optimizer",
+    ]))
