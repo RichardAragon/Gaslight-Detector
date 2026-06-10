@@ -1,0 +1,23 @@
+"""Run the same task across several providers and print the spike verdicts side by side.
+
+This is the recommended cross-model control: an open-weights local model is a useful baseline
+against hosted models on the same ladder. Pass --config with a judge panel for fulfilment scoring.
+"""
+import json
+from pathlib import Path
+
+from gaslight_detector.cli import main
+
+JOBS = [
+    ("openai", "gpt-4.1"),
+    ("anthropic", "claude-3-5-sonnet-latest"),
+    ("local", "Qwen/Qwen2.5-7B-Instruct"),
+]
+
+if __name__ == "__main__":
+    for provider, model in JOBS:
+        out = f"outputs/cmp_{provider}"
+        main(["run", "--task", "tasks/optimizer_manifold_retention.yaml",
+              "--provider", provider, "--model", model, "--samples", "3", "--out", out])
+        s = json.loads(Path(out, "scores.json").read_text())["risk_ladder"]["spike"]
+        print(f"{provider:10s} {model:30s} spike={s['flag']} ({s['strength']})")
