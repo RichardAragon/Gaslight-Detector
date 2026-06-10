@@ -1,3 +1,4 @@
+<img width="1448" height="1086" alt="ChatGPT Image Jun 10, 2026, 10_26_44 AM" src="https://github.com/user-attachments/assets/958e58ee-a517-4e89-85e9-671b4441c8cd" />
 # Gaslight Detector
 
 **A benchmark for framing-conditioned structural deformation in AI model outputs.**
