@@ -1,0 +1,11 @@
+"""Re-score saved raw responses offline (no provider calls)."""
+from gaslight_detector.cli import main
+
+if __name__ == "__main__":
+    raise SystemExit(main([
+        "analyze",
+        "--task", "tasks/demo_synthetic.yaml",
+        "--raw", "examples/fixtures/demo_raw_responses.jsonl",
+        "--model", "demo-model",
+        "--out", "outputs/demo_reanalysis",
+    ]))
