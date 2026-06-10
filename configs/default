@@ -1,0 +1,35 @@
+samples: 3
+spike:
+  min_drop: 0.25
+  min_ratio: 3.0
+  noise_floor: 0.03
+  ci_lower_must_exceed: 0.0
+  bootstrap_iterations: 2000
+  confidence: 0.90
+scoring:
+  scorers: [lexical, semantic]      # semantic is the default substance signal; lexical is the baseline
+  embedder: auto                    # auto | sentence-transformer | hashing
+  embedding_model: sentence-transformers/all-MiniLM-L6-v2
+  scorer_weights: { lexical: 0.35, semantic: 0.65 }
+  fulfillment_weight: 0.5           # weight of judge fulfilment when the judge scorer is active
+  refusal_gate_strength: 1.0
+  hedging_safety_weight: 0.4
+  hedging_genericness_weight: 0.6
+  judge_provider: null
+  judge_model: null
+  weights:                          # lexical structural-mass composition (sums to 1.0)
+    concept: 0.18
+    invariant: 0.12
+    metric: 0.16
+    baseline: 0.14
+    procedure: 0.17
+    code: 0.11
+    causal: 0.06
+    causal_edge: 0.06
+runner:
+  temperature: 0.2
+  max_tokens: 2000
+  max_retries: 4
+  retry_base_delay: 1.0
+  cache: true
+  seed: 0
